@@ -1,6 +1,7 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link2 } from 'lucide-react';
+import { staggerRevealVariants } from '@/hooks/useScrollAnimation';
 
 const integrations = [
   {
@@ -35,47 +36,71 @@ const integrations = [
   },
 ];
 
+const variants = staggerRevealVariants({ staggerDelay: 0.15 });
+
 const IntegrationsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const containerY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-muted/30 border-y border-border">
-      <div className="container mx-auto px-4 md:px-6">
+    <section ref={ref} className="py-16 md:py-24 bg-muted/30 border-y border-border overflow-hidden">
+      <motion.div 
+        className="container mx-auto px-4 md:px-6"
+        style={{ y: containerY }}
+      >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 text-muted-foreground mb-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 text-muted-foreground mb-4"
+          >
             <Link2 size={16} />
             <span className="text-sm font-medium">Integramos com suas ferramentas favoritas</span>
-          </div>
+          </motion.div>
         </motion.div>
 
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+        <motion.div 
+          className="flex flex-wrap items-center justify-center gap-8 md:gap-16"
+          variants={variants.container}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {integrations.map((integration, index) => (
             <motion.div
               key={integration.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex flex-col items-center gap-3 group"
+              variants={variants.scaleUp}
+              whileHover={{ y: -8, scale: 1.05 }}
+              className="flex flex-col items-center gap-3 group cursor-default"
             >
-              <div className="w-20 h-20 bg-card border border-border rounded-2xl flex items-center justify-center group-hover:border-primary/30 group-hover:shadow-lg transition-all duration-300">
+              <motion.div 
+                className="w-20 h-20 bg-card border border-border rounded-2xl flex items-center justify-center group-hover:border-primary/30 group-hover:shadow-lg transition-all duration-300"
+                whileHover={{ rotate: 5 }}
+              >
                 <div className="text-muted-foreground group-hover:text-foreground transition-colors">
                   {integration.logo}
                 </div>
-              </div>
+              </motion.div>
               <div className="text-center">
                 <div className="font-medium text-foreground text-sm">{integration.name}</div>
                 <div className="text-xs text-muted-foreground">{integration.description}</div>
               </div>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
