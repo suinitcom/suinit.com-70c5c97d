@@ -1,36 +1,33 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { AlertTriangle, Clock, Snail, HeadphoneOff, Lock } from 'lucide-react';
-import { staggerRevealVariants } from '@/hooks/useScrollAnimation';
+import { AlertTriangle, Clock, Snail, HeadphoneOff, Lock, ArrowRight } from 'lucide-react';
 
 const painPoints = [
   {
     icon: Clock,
+    number: '01',
     title: 'Prazos Estourados',
     description: 'Projetos que nunca terminam e sempre têm "só mais uma semana".',
-    color: 'from-red-500/20 to-orange-500/20',
   },
   {
     icon: Snail,
+    number: '02',
     title: 'Sites Lentos',
-    description: 'Páginas que demoram uma eternidade para carregar e afugentam clientes.',
-    color: 'from-orange-500/20 to-yellow-500/20',
+    description: 'Páginas que demoram uma eternidade para carregar.',
   },
   {
     icon: HeadphoneOff,
+    number: '03',
     title: 'Suporte Fantasma',
-    description: 'Desenvolvedores que somem depois da entrega e nunca mais respondem.',
-    color: 'from-yellow-500/20 to-amber-500/20',
+    description: 'Desenvolvedores que somem depois da entrega.',
   },
   {
     icon: Lock,
+    number: '04',
     title: 'Código Engessado',
-    description: 'Sistemas impossíveis de escalar ou modificar sem quebrar tudo.',
-    color: 'from-amber-500/20 to-red-500/20',
+    description: 'Sistemas impossíveis de escalar ou modificar.',
   },
 ];
-
-const variants = staggerRevealVariants({ staggerDelay: 0.15 });
 
 const PainPointsSection = () => {
   const ref = useRef(null);
@@ -41,110 +38,121 @@ const PainPointsSection = () => {
     offset: ["start end", "end start"]
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
-    <section id="solucoes" ref={ref} className="py-20 md:py-32 bg-background relative overflow-hidden">
-      {/* Background decoration with parallax */}
+    <section 
+      id="solucoes" 
+      ref={ref} 
+      className="py-24 md:py-40 bg-background relative overflow-hidden"
+    >
+      {/* Large decorative number */}
       <motion.div 
-        className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-primary/5 to-transparent rounded-full blur-3xl"
-        style={{ y: backgroundY }}
-      />
+        className="absolute -left-20 top-1/4 decorative-number select-none pointer-events-none"
+        style={{ y: y1 }}
+      >
+        01
+      </motion.div>
+
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 grid-pattern opacity-50" />
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-center mb-16"
-        >
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-destructive/10 text-destructive rounded-full px-4 py-2 mb-6"
+        {/* Section Header - Asymmetric Layout */}
+        <div className="grid lg:grid-cols-[1.5fr,1fr] gap-8 lg:gap-16 mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
           >
-            <AlertTriangle size={16} />
-            <span className="text-sm font-medium">Você já passou por isso?</span>
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 mb-6"
+            >
+              <AlertTriangle size={16} />
+              <span className="text-sm font-bold uppercase tracking-wider">Você já passou por isso?</span>
+            </motion.div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+              O Trauma de
+              <br />
+              <span className="font-display italic text-destructive">Desenvolvedores</span>
+              <br />
+              Amadores
+            </h2>
           </motion.div>
-          <motion.h2 
+
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col justify-end"
           >
-            O Trauma de Trabalhar com{' '}
-            <span className="text-destructive">Desenvolvedores Amadores</span>
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
-          >
-            Infelizmente, muitas empresas já sofreram com projetos mal executados. 
-            Entendemos sua dor – e é por isso que fazemos diferente.
-          </motion.p>
-        </motion.div>
+            <p className="text-lg text-muted-foreground mb-6">
+              Infelizmente, muitas empresas já sofreram com projetos mal executados. 
+              Entendemos sua dor – e é por isso que fazemos diferente.
+            </p>
+            <motion.a 
+              href="#diferenciais"
+              whileHover={{ gap: '1rem' }}
+              className="inline-flex items-center gap-2 text-primary font-bold text-lg underline-animate"
+            >
+              Nossa abordagem
+              <ArrowRight size={20} />
+            </motion.a>
+          </motion.div>
+        </div>
 
-        {/* Pain Points Grid with Stagger Animation */}
-        <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          variants={variants.container}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
+        {/* Pain Points Grid - Creative Layout */}
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {painPoints.map((point, index) => (
             <motion.div
               key={point.title}
-              variants={variants.item}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              initial={{ opacity: 0, y: 50, rotate: -2 }}
+              animate={isInView ? { opacity: 1, y: 0, rotate: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+              whileHover={{ y: -8, rotate: 1 }}
               className="group relative"
             >
-              <motion.div 
-                className={`absolute inset-0 bg-gradient-to-br ${point.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                initial={{ scale: 0.8 }}
-                whileHover={{ scale: 1.1 }}
-              />
-              <div className="relative bg-card border border-border rounded-2xl p-6 h-full hover:border-destructive/30 transition-colors duration-300">
-                <motion.div 
-                  className="w-12 h-12 bg-destructive/10 rounded-xl flex items-center justify-center mb-4"
-                  whileHover={{ scale: 1.15, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <point.icon className="w-6 h-6 text-destructive" />
-                </motion.div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">{point.title}</h3>
-                <p className="text-muted-foreground text-sm">{point.description}</p>
+              <div className="relative bg-card border-2 border-border p-8 transition-all duration-500 group-hover:border-destructive/50 group-hover:shadow-lg">
+                {/* Number */}
+                <span className="absolute -top-4 -right-4 text-8xl font-display font-bold text-destructive/10 group-hover:text-destructive/20 transition-colors">
+                  {point.number}
+                </span>
+                
+                <div className="relative z-10">
+                  <motion.div 
+                    className="w-14 h-14 bg-destructive/10 flex items-center justify-center mb-6"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <point.icon className="w-7 h-7 text-destructive" />
+                  </motion.div>
+                  
+                  <h3 className="text-2xl font-bold text-foreground mb-3">{point.title}</h3>
+                  <p className="text-muted-foreground">{point.description}</p>
+                </div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Solution Teaser */}
+        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-16"
+          className="text-center mt-20"
         >
-          <p className="text-lg text-muted-foreground mb-4">
-            Chega de frustrações. É hora de trabalhar com profissionais de verdade.
+          <p className="text-xl text-muted-foreground mb-2">
+            Chega de frustrações.
           </p>
-          <motion.a 
-            href="#diferenciais"
-            className="inline-flex items-center gap-2 text-primary font-semibold transition-all duration-300"
-            whileHover={{ gap: '1rem' }}
-          >
-            Conheça nossa abordagem
-            <motion.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              →
-            </motion.span>
-          </motion.a>
+          <p className="text-2xl font-bold text-foreground">
+            É hora de trabalhar com <span className="text-primary">profissionais de verdade</span>.
+          </p>
         </motion.div>
       </div>
     </section>
