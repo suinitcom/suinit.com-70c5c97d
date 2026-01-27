@@ -1,7 +1,7 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Link2 } from 'lucide-react';
-import { staggerRevealVariants } from '@/hooks/useScrollAnimation';
+import Marquee from '../ui/Marquee';
 
 const integrations = [
   {
@@ -34,73 +34,72 @@ const integrations = [
       </svg>
     ),
   },
+  {
+    name: 'Stripe',
+    description: 'Pagamentos',
+    logo: (
+      <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#635BFF">
+        <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/>
+      </svg>
+    ),
+  },
+  {
+    name: 'Slack',
+    description: 'Comunicação',
+    logo: (
+      <svg viewBox="0 0 24 24" className="w-10 h-10">
+        <path fill="#E01E5A" d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z"/>
+        <path fill="#36C5F0" d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z"/>
+        <path fill="#2EB67D" d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zm-1.27 0a2.528 2.528 0 0 1-2.522 2.521 2.528 2.528 0 0 1-2.52-2.521V2.522A2.528 2.528 0 0 1 15.165 0a2.528 2.528 0 0 1 2.521 2.522v6.312z"/>
+        <path fill="#ECB22E" d="M15.165 18.956a2.528 2.528 0 0 1 2.521 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zm0-1.27a2.527 2.527 0 0 1-2.52-2.522 2.527 2.527 0 0 1 2.52-2.52h6.313A2.528 2.528 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.521h-6.313z"/>
+      </svg>
+    ),
+  },
 ];
-
-const variants = staggerRevealVariants({ staggerDelay: 0.15 });
 
 const IntegrationsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const containerY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-muted/30 border-y border-border overflow-hidden">
-      <motion.div 
-        className="container mx-auto px-4 md:px-6"
-        style={{ y: containerY }}
-      >
+    <section ref={ref} className="py-20 md:py-32 bg-muted/50 border-y-2 border-border overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-center mb-12"
+          transition={{ duration: 0.7 }}
+          className="text-center"
         >
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 text-muted-foreground mb-4"
           >
             <Link2 size={16} />
-            <span className="text-sm font-medium">Integramos com suas ferramentas favoritas</span>
+            <span className="text-sm font-bold uppercase tracking-wider">Integramos com suas ferramentas favoritas</span>
           </motion.div>
         </motion.div>
+      </div>
 
-        <motion.div 
-          className="flex flex-wrap items-center justify-center gap-8 md:gap-16"
-          variants={variants.container}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          {integrations.map((integration, index) => (
-            <motion.div
-              key={integration.name}
-              variants={variants.scaleUp}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="flex flex-col items-center gap-3 group cursor-default"
-            >
-              <motion.div 
-                className="w-20 h-20 bg-card border border-border rounded-2xl flex items-center justify-center group-hover:border-primary/30 group-hover:shadow-lg transition-all duration-300"
-                whileHover={{ rotate: 5 }}
-              >
-                <div className="text-muted-foreground group-hover:text-foreground transition-colors">
-                  {integration.logo}
-                </div>
-              </motion.div>
-              <div className="text-center">
-                <div className="font-medium text-foreground text-sm">{integration.name}</div>
-                <div className="text-xs text-muted-foreground">{integration.description}</div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
+      {/* Full-width Marquee */}
+      <Marquee speed={40} className="py-8">
+        {integrations.map((integration, index) => (
+          <motion.div
+            key={integration.name}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="flex items-center gap-4 bg-card border-2 border-border px-6 py-4 mx-4 hover:border-primary/30 transition-colors cursor-default group"
+          >
+            <div className="text-muted-foreground group-hover:text-foreground transition-colors">
+              {integration.logo}
+            </div>
+            <div>
+              <div className="font-bold text-foreground">{integration.name}</div>
+              <div className="text-xs text-muted-foreground">{integration.description}</div>
+            </div>
+          </motion.div>
+        ))}
+      </Marquee>
     </section>
   );
 };
