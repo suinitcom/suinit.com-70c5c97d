@@ -1,92 +1,19 @@
 import { motion, useInView, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Check, ChevronDown, Star, Zap, TrendingUp, Shield, HeadphonesIcon, BarChart3, Users, ArrowRight } from 'lucide-react';
+import { Check, ChevronDown, Star, Zap, TrendingUp, Shield, HeadphonesIcon, BarChart3, Users, ArrowRight, Building2 } from 'lucide-react';
 import MagneticButton from '../ui/MagneticButton';
+import { useLanguage, formatPrice } from '@/i18n/LanguageContext';
 
-const plans = [
-  {
-    id: 'essencial',
-    name: 'Essencial',
-    price: 'R$ 450',
-    period: '/mês',
-    description: 'Foco em estabilidade e suporte contínuo para seu negócio.',
-    highlight: false,
-    features: [
-      'Hospedagem Edge Computing',
-      'E-mail Gerenciado',
-      'Certificado SSL',
-      '1h de suporte técnico/mês',
-      'Monitoramento 24/7',
-      'Backups automáticos',
-    ],
-    expandedFeatures: [
-      {
-        icon: Shield,
-        title: 'Hospedagem Edge Computing',
-        description: 'Servidores distribuídos globalmente para latência mínima.'
-      },
-      {
-        icon: HeadphonesIcon,
-        title: 'E-mail Profissional',
-        description: 'E-mails personalizados com seu domínio (@suaempresa.com).'
-      },
-      {
-        icon: Shield,
-        title: 'Certificado SSL Premium',
-        description: 'Criptografia de ponta a ponta e selo de segurança.'
-      },
-      {
-        icon: Zap,
-        title: '1 Hora Técnica Mensal',
-        description: 'Suporte para ajustes, dúvidas e pequenas melhorias.'
-      },
-    ]
-  },
-  {
-    id: 'evolution',
-    name: 'Evolution',
-    price: 'R$ 1.200',
-    period: '/mês',
-    description: 'Para empresas que querem escalar com inteligência.',
-    highlight: true,
-    badge: 'Mais Popular',
-    features: [
-      'Tudo do plano Essencial',
-      'Integração CRM/WhatsApp',
-      'SEO mensal otimizado',
-      'Consultoria estratégica',
-      'Dashboard de Leads',
-      'Relatórios de performance',
-    ],
-    expandedFeatures: [
-      {
-        icon: Users,
-        title: 'Integração CRM & WhatsApp',
-        description: 'Conecte seu site ao HubSpot, RD Station ou similar.'
-      },
-      {
-        icon: TrendingUp,
-        title: 'SEO Mensal Otimizado',
-        description: 'Otimização contínua para manter seu site no topo do Google.'
-      },
-      {
-        icon: Star,
-        title: 'Consultoria Estratégica',
-        description: 'Reuniões mensais para analisar métricas e planejar melhorias.'
-      },
-      {
-        icon: BarChart3,
-        title: 'Dashboard de Leads',
-        description: 'Painel em tempo real com todos os leads e métricas.'
-      },
-    ]
-  },
-];
+const USD_PRICES = {
+  essential: 97,
+  growth: 197,
+};
 
 const PricingSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [expandedPlan, setExpandedPlan] = useState<string | null>(null);
+  const { t, language, exchangeRate } = useLanguage();
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -94,6 +21,63 @@ const PricingSection = () => {
   });
 
   const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
+  const iconMap = {
+    shield: Shield,
+    headphones: HeadphonesIcon,
+    zap: Zap,
+    users: Users,
+    trending: TrendingUp,
+    star: Star,
+    chart: BarChart3,
+    building: Building2,
+  };
+
+  const plans = [
+    {
+      id: 'essential',
+      name: t.pricing.plans.essential.name,
+      focus: t.pricing.plans.essential.focus,
+      price: formatPrice(USD_PRICES.essential, language, exchangeRate),
+      period: '/mês',
+      description: t.pricing.plans.essential.description,
+      highlight: false,
+      features: t.pricing.plans.essential.features,
+      expandedFeatures: t.pricing.plans.essential.expandedFeatures.map((f, i) => ({
+        ...f,
+        icon: [Shield, Shield, HeadphonesIcon][i] || Shield,
+      })),
+    },
+    {
+      id: 'growth',
+      name: t.pricing.plans.growth.name,
+      focus: t.pricing.plans.growth.focus,
+      price: formatPrice(USD_PRICES.growth, language, exchangeRate),
+      period: '/mês',
+      description: t.pricing.plans.growth.description,
+      highlight: true,
+      badge: t.pricing.plans.growth.badge,
+      features: t.pricing.plans.growth.features,
+      expandedFeatures: t.pricing.plans.growth.expandedFeatures.map((f, i) => ({
+        ...f,
+        icon: [Users, TrendingUp, BarChart3, Star][i] || Star,
+      })),
+    },
+    {
+      id: 'enterprise',
+      name: t.pricing.plans.enterprise.name,
+      focus: t.pricing.plans.enterprise.focus,
+      price: t.pricing.plans.enterprise.priceLabel,
+      period: '',
+      description: t.pricing.plans.enterprise.description,
+      highlight: false,
+      features: t.pricing.plans.enterprise.features,
+      expandedFeatures: t.pricing.plans.enterprise.expandedFeatures.map((f, i) => ({
+        ...f,
+        icon: [Building2, BarChart3, Zap, HeadphonesIcon][i] || Building2,
+      })),
+    },
+  ];
 
   return (
     <section id="planos" ref={ref} className="py-24 md:py-40 section-mesh noise-overlay relative overflow-hidden">
@@ -107,7 +91,7 @@ const PricingSection = () => {
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -115,7 +99,7 @@ const PricingSection = () => {
             className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 mb-6"
           >
             <Star size={16} />
-            <span className="text-sm font-bold uppercase tracking-wider">Planos Flexíveis</span>
+            <span className="text-sm font-bold uppercase tracking-wider">{t.pricing.badge}</span>
           </motion.div>
           
           <motion.h2 
@@ -124,31 +108,40 @@ const PricingSection = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
           >
-            Escolha o Plano
+            {t.pricing.title1}
             <br />
-            <span className="font-display italic text-primary-glow">Ideal</span>
+            <span className="font-display italic text-primary-glow">{t.pricing.title2}</span>
           </motion.h2>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-white/60 max-w-xl mx-auto"
+            className="text-lg text-white/60 max-w-xl mx-auto mb-4"
           >
-            Soluções pensadas para cada estágio do seu negócio. 
-            Sem surpresas, sem custos ocultos.
+            {t.pricing.description}
+          </motion.p>
+
+          {/* Setup Note */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-sm text-white/40 max-w-xl mx-auto bg-white/5 px-4 py-2 border border-white/10"
+          >
+            {t.pricing.setupNote}
           </motion.p>
         </div>
 
         {/* Plans Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.id}
-              initial={{ opacity: 0, y: 50, rotate: index === 0 ? -2 : 2 }}
+              initial={{ opacity: 0, y: 50, rotate: index === 1 ? 0 : (index === 0 ? -1 : 1) }}
               animate={isInView ? { opacity: 1, y: 0, rotate: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-              whileHover={{ y: -10, rotate: index === 0 ? 1 : -1 }}
+              whileHover={{ y: -10 }}
               className={`relative ${plan.highlight ? 'md:-mt-4 md:mb-4' : ''}`}
             >
               {plan.badge && (
@@ -164,21 +157,24 @@ const PricingSection = () => {
                 </motion.div>
               )}
               
-              <div className={`bg-white p-8 md:p-10 h-full ${plan.highlight ? 'ring-4 ring-primary-glow/30 shadow-2xl' : 'shadow-lg'}`}>
+              <div className={`bg-white p-6 md:p-8 h-full ${plan.highlight ? 'ring-4 ring-primary-glow/30 shadow-2xl' : 'shadow-lg'}`}>
                 {/* Header */}
-                <div className="text-center mb-8">
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold px-3 py-1 mb-3">
+                    {plan.focus}
+                  </div>
                   <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
-                  <p className="text-muted-foreground text-sm mb-6">{plan.description}</p>
+                  <p className="text-muted-foreground text-sm mb-4">{plan.description}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-5xl font-display font-bold text-primary">
+                    <span className="text-4xl font-display font-bold text-primary">
                       {plan.price}
                     </span>
-                    <span className="text-muted-foreground">{plan.period}</span>
+                    {plan.period && <span className="text-muted-foreground">{plan.period}</span>}
                   </div>
                 </div>
 
                 {/* Features */}
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-3 mb-6">
                   {plan.features.map((feature, featureIndex) => (
                     <motion.li 
                       key={feature} 
@@ -203,13 +199,13 @@ const PricingSection = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`flex items-center justify-center gap-2 w-full font-bold py-4 transition-all duration-300 mb-4 ${
+                    className={`flex items-center justify-center gap-2 w-full font-bold py-4 transition-all duration-300 mb-3 ${
                       plan.highlight 
                         ? 'btn-brutal' 
                         : 'bg-muted text-foreground hover:bg-primary hover:text-white'
                     }`}
                   >
-                    Contratar Agora
+                    {t.pricing.cta}
                     <ArrowRight size={18} />
                   </motion.a>
                 </MagneticButton>
@@ -220,7 +216,7 @@ const PricingSection = () => {
                   whileHover={{ scale: 1.02 }}
                   className="flex items-center justify-center gap-2 w-full text-primary text-sm font-medium hover:text-primary-dark transition-colors py-2"
                 >
-                  Saiba Mais
+                  {t.pricing.learnMore}
                   <motion.span
                     animate={{ rotate: expandedPlan === plan.id ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
@@ -239,17 +235,17 @@ const PricingSection = () => {
                       transition={{ duration: 0.4 }}
                       className="overflow-hidden"
                     >
-                      <div className="pt-6 mt-6 border-t-2 border-border space-y-4">
+                      <div className="pt-4 mt-4 border-t-2 border-border space-y-4">
                         {plan.expandedFeatures.map((feature, idx) => (
                           <motion.div
                             key={feature.title}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.08, duration: 0.4 }}
-                            className="flex gap-4"
+                            className="flex gap-3"
                           >
-                            <div className="w-10 h-10 bg-primary/10 flex items-center justify-center flex-shrink-0">
-                              <feature.icon className="w-5 h-5 text-primary" />
+                            <div className="w-8 h-8 bg-primary/10 flex items-center justify-center flex-shrink-0">
+                              <feature.icon className="w-4 h-4 text-primary" />
                             </div>
                             <div>
                               <h4 className="font-bold text-foreground text-sm">{feature.title}</h4>

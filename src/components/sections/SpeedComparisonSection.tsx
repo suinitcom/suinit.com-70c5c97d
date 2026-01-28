@@ -2,6 +2,7 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Play, Gauge, TrendingUp, TrendingDown, RotateCcw } from 'lucide-react';
 import MagneticButton from '../ui/MagneticButton';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 const SpeedComparisonSection = () => {
   const ref = useRef(null);
@@ -10,6 +11,7 @@ const SpeedComparisonSection = () => {
   const [isComplete, setIsComplete] = useState(false);
   const [regularProgress, setRegularProgress] = useState(0);
   const [suinitProgress, setSuinitProgress] = useState(0);
+  const { t, language } = useLanguage();
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -63,6 +65,18 @@ const SpeedComparisonSection = () => {
     };
   }, [isPlaying]);
 
+  const getSlowMessage = () => {
+    if (language === 'pt') return 'Lento demais. Usuários abandonam antes de carregar.';
+    if (language === 'es') return 'Demasiado lento. Los usuarios abandonan antes de cargar.';
+    return 'Too slow. Users leave before it loads.';
+  };
+
+  const getFastMessage = () => {
+    if (language === 'pt') return 'Instantâneo. Melhor experiência = Mais conversões.';
+    if (language === 'es') return 'Instantáneo. Mejor experiencia = Más conversiones.';
+    return 'Instant. Better experience = More conversions.';
+  };
+
   return (
     <section ref={ref} className="py-24 md:py-40 bg-muted/30 relative overflow-hidden">
       {/* Decorative number */}
@@ -88,13 +102,13 @@ const SpeedComparisonSection = () => {
               className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 mb-6"
             >
               <Gauge size={16} />
-              <span className="text-sm font-bold uppercase tracking-wider">Performance Demo</span>
+              <span className="text-sm font-bold uppercase tracking-wider">{t.speedComparison.badge}</span>
             </motion.div>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-              Veja a
+              {t.speedComparison.title1}
               <br />
-              <span className="font-display italic text-primary">Diferença</span>
+              <span className="font-display italic text-primary">{t.speedComparison.title2}</span>
             </h2>
           </motion.div>
 
@@ -105,8 +119,7 @@ const SpeedComparisonSection = () => {
             className="flex flex-col justify-end"
           >
             <p className="text-lg text-muted-foreground">
-              Compare o tempo de carregamento de um site comum com um site 
-              desenvolvido pela Suinit. Clique para ver na prática.
+              {t.speedComparison.description}
             </p>
           </motion.div>
         </div>
@@ -130,7 +143,7 @@ const SpeedComparisonSection = () => {
                     className="inline-flex items-center gap-3 btn-brutal bg-muted text-foreground"
                   >
                     <RotateCcw size={20} />
-                    Repetir Comparação
+                    {language === 'pt' ? 'Repetir Comparação' : language === 'es' ? 'Repetir Comparación' : 'Repeat Comparison'}
                   </motion.button>
                 ) : (
                   <motion.button
@@ -141,7 +154,7 @@ const SpeedComparisonSection = () => {
                     className="inline-flex items-center gap-3 btn-brutal disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Play size={20} />
-                    {isPlaying ? 'Carregando...' : 'Iniciar Comparação'}
+                    {isPlaying ? t.speedComparison.testing : t.speedComparison.runTest}
                   </motion.button>
                 )}
               </MagneticButton>
@@ -154,7 +167,7 @@ const SpeedComparisonSection = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <TrendingDown className="w-6 h-6 text-destructive" />
-                    <span className="font-bold text-foreground text-lg">Site Comum</span>
+                    <span className="font-bold text-foreground text-lg">{t.speedComparison.regularSite}</span>
                   </div>
                   <span className="text-2xl font-mono font-bold text-destructive">
                     {regularProgress >= 100 ? '4.2s' : '...'}
@@ -173,7 +186,7 @@ const SpeedComparisonSection = () => {
                     className="flex items-center gap-2 text-sm text-destructive"
                   >
                     <span>✗</span>
-                    <span>Lento demais. Usuários abandonam antes de carregar.</span>
+                    <span>{getSlowMessage()}</span>
                   </motion.p>
                 )}
               </div>
@@ -183,7 +196,7 @@ const SpeedComparisonSection = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <TrendingUp className="w-6 h-6 text-primary" />
-                    <span className="font-bold text-foreground text-lg">Site Suinit</span>
+                    <span className="font-bold text-foreground text-lg">{t.speedComparison.suinitSite}</span>
                   </div>
                   <span className="text-2xl font-mono font-bold text-primary">
                     {suinitProgress >= 100 ? '0.8s' : '...'}
@@ -202,7 +215,7 @@ const SpeedComparisonSection = () => {
                     className="flex items-center gap-2 text-sm text-primary"
                   >
                     <span>✓</span>
-                    <span>Instantâneo. Melhor experiência = Mais conversões.</span>
+                    <span>{getFastMessage()}</span>
                   </motion.p>
                 )}
               </div>
@@ -217,9 +230,9 @@ const SpeedComparisonSection = () => {
                 className="mt-12 pt-10 border-t-2 border-border grid grid-cols-3 gap-6"
               >
                 {[
-                  { value: '5x', label: 'Mais rápido' },
-                  { value: '+40%', label: 'Conversão' },
-                  { value: '-53%', label: 'Bounce Rate' }
+                  { value: '5x', label: t.speedComparison.stats.faster },
+                  { value: '+40%', label: t.speedComparison.stats.conversion },
+                  { value: '100', label: t.speedComparison.stats.seo }
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}

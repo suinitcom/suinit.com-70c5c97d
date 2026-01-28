@@ -2,22 +2,24 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Mail, Phone, MapPin, ArrowUpRight, Instagram, Linkedin, Github } from 'lucide-react';
 import MagneticButton from '../ui/MagneticButton';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 const Footer = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const { t } = useLanguage();
 
   const socialLinks = [
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Github, href: '#', label: 'GitHub' },
+    { icon: Instagram, href: 'https://instagram.com/suinitcom', label: 'Instagram' },
+    { icon: Linkedin, href: 'https://linkedin.com/company/suinitcom', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/suinitcom', label: 'GitHub' },
   ];
 
   const links = [
-    { label: 'Soluções', href: '#solucoes' },
-    { label: 'Diferenciais', href: '#diferenciais' },
-    { label: 'Planos', href: '#planos' },
-    { label: 'SaaS', href: '#saas' },
+    { label: t.nav.solutions, href: '#solucoes' },
+    { label: t.nav.differentials, href: '#diferenciais' },
+    { label: t.nav.plans, href: '#planos' },
+    { label: t.nav.saas, href: '#saas' },
   ];
 
   return (
@@ -32,13 +34,13 @@ const Footer = () => {
             className="max-w-4xl mx-auto text-center"
           >
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Vamos criar algo
+              {t.footer.cta.title1}
               <br />
-              <span className="font-display italic text-primary-glow">extraordinário</span>?
+              <span className="font-display italic text-primary-glow">{t.footer.cta.title2}</span>?
             </h2>
             
             <p className="text-lg text-white/60 mb-10 max-w-xl mx-auto">
-              Entre em contato e descubra como podemos transformar sua ideia em um sistema que gera resultados reais.
+              {t.footer.cta.description}
             </p>
 
             <MagneticButton strength={0.2}>
@@ -50,7 +52,7 @@ const Footer = () => {
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center gap-3 bg-white text-primary font-bold px-10 py-5 text-lg transition-all duration-300 hover:bg-primary-glow hover:text-white"
               >
-                Iniciar Conversa
+                {t.footer.cta.button}
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
@@ -76,8 +78,11 @@ const Footer = () => {
               <div className="text-3xl font-bold text-white mb-4">
                 suinit<span className="text-primary-glow">.</span>
               </div>
-              <p className="text-white/50 text-sm">
-                Desenvolvimento web premium com foco em ROI e escalabilidade.
+              <p className="text-white/50 text-sm mb-4">
+                {t.footer.brand}
+              </p>
+              <p className="text-white/40 text-sm">
+                @suinitcom
               </p>
             </motion.div>
 
@@ -87,7 +92,7 @@ const Footer = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Navegação</h3>
+              <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">{t.footer.navigation}</h3>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
@@ -109,7 +114,7 @@ const Footer = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Contato</h3>
+              <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">{t.footer.contact}</h3>
               <ul className="space-y-3">
                 <li className="flex items-center gap-3 text-white/50 text-sm">
                   <Mail className="w-4 h-4" />
@@ -132,12 +137,14 @@ const Footer = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Siga-nos</h3>
+              <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">{t.footer.followUs}</h3>
               <div className="flex gap-4">
                 {socialLinks.map((social) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ y: -3, scale: 1.1 }}
                     className="w-10 h-10 bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
                     aria-label={social.label}
@@ -146,20 +153,23 @@ const Footer = () => {
                   </motion.a>
                 ))}
               </div>
+              <p className="text-white/40 text-sm mt-4">
+                @suinitcom
+              </p>
             </motion.div>
           </div>
 
           {/* Bottom bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-white/30 text-sm">
-              © {new Date().getFullYear()} Suinit. Todos os direitos reservados.
+              © {new Date().getFullYear()} Suinit. {t.footer.rights}
             </p>
             <div className="flex items-center gap-6">
               <a href="#" className="text-white/30 hover:text-white text-sm transition-colors">
-                Política de Privacidade
+                {t.footer.privacy}
               </a>
               <a href="#" className="text-white/30 hover:text-white text-sm transition-colors">
-                Termos de Uso
+                {t.footer.terms}
               </a>
             </div>
           </div>
