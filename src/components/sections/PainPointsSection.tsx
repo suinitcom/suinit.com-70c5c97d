@@ -1,37 +1,12 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { AlertTriangle, Clock, Snail, HeadphoneOff, Lock, ArrowRight } from 'lucide-react';
-
-const painPoints = [
-  {
-    icon: Clock,
-    number: '01',
-    title: 'Prazos Estourados',
-    description: 'Projetos que nunca terminam e sempre têm "só mais uma semana".',
-  },
-  {
-    icon: Snail,
-    number: '02',
-    title: 'Sites Lentos',
-    description: 'Páginas que demoram uma eternidade para carregar.',
-  },
-  {
-    icon: HeadphoneOff,
-    number: '03',
-    title: 'Suporte Fantasma',
-    description: 'Desenvolvedores que somem depois da entrega.',
-  },
-  {
-    icon: Lock,
-    number: '04',
-    title: 'Código Engessado',
-    description: 'Sistemas impossíveis de escalar ou modificar.',
-  },
-];
+import { useLanguage } from '@/i18n/LanguageContext';
 
 const PainPointsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { t, language } = useLanguage();
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -39,7 +14,33 @@ const PainPointsSection = () => {
   });
 
   const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  const painPoints = [
+    {
+      icon: Clock,
+      number: '01',
+      title: t.painPoints.card1.title,
+      description: t.painPoints.card1.description,
+    },
+    {
+      icon: Snail,
+      number: '02',
+      title: t.painPoints.card2.title,
+      description: t.painPoints.card2.description,
+    },
+    {
+      icon: HeadphoneOff,
+      number: '03',
+      title: t.painPoints.card3.title,
+      description: t.painPoints.card3.description,
+    },
+    {
+      icon: Lock,
+      number: '04',
+      title: t.painPoints.card4.title,
+      description: t.painPoints.card4.description,
+    },
+  ];
 
   return (
     <section 
@@ -73,15 +74,15 @@ const PainPointsSection = () => {
               className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 mb-6"
             >
               <AlertTriangle size={16} />
-              <span className="text-sm font-bold uppercase tracking-wider">Você já passou por isso?</span>
+              <span className="text-sm font-bold uppercase tracking-wider">{t.painPoints.badge}</span>
             </motion.div>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-              O Trauma de
+              {t.painPoints.title1}
               <br />
-              <span className="font-display italic text-destructive">Desenvolvedores</span>
+              <span className="font-display italic text-destructive">{t.painPoints.title2}</span>
               <br />
-              Amadores
+              {t.painPoints.title3}?
             </h2>
           </motion.div>
 
@@ -92,15 +93,14 @@ const PainPointsSection = () => {
             className="flex flex-col justify-end"
           >
             <p className="text-lg text-muted-foreground mb-6">
-              Infelizmente, muitas empresas já sofreram com projetos mal executados. 
-              Entendemos sua dor – e é por isso que fazemos diferente.
+              {t.painPoints.bottomDescription}
             </p>
             <motion.a 
               href="#diferenciais"
               whileHover={{ gap: '1rem' }}
               className="inline-flex items-center gap-2 text-primary font-bold text-lg underline-animate"
             >
-              Nossa abordagem
+              {language === 'pt' ? 'Nossa abordagem' : language === 'es' ? 'Nuestro enfoque' : 'Our approach'}
               <ArrowRight size={20} />
             </motion.a>
           </motion.div>
@@ -148,10 +148,12 @@ const PainPointsSection = () => {
           className="text-center mt-20"
         >
           <p className="text-xl text-muted-foreground mb-2">
-            Chega de frustrações.
+            {t.painPoints.bottomTitle}
           </p>
           <p className="text-2xl font-bold text-foreground">
-            É hora de trabalhar com <span className="text-primary">profissionais de verdade</span>.
+            {language === 'pt' && <>É hora de trabalhar com <span className="text-primary">profissionais de verdade</span>.</>}
+            {language === 'en' && <>It's time to work with <span className="text-primary">real professionals</span>.</>}
+            {language === 'es' && <>Es hora de trabajar con <span className="text-primary">profesionales de verdad</span>.</>}
           </p>
         </motion.div>
       </div>

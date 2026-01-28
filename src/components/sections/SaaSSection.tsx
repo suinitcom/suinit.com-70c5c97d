@@ -2,21 +2,17 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Layers, ArrowRight, Code2, Database, Workflow } from 'lucide-react';
 import MagneticButton from '../ui/MagneticButton';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 const projects = [
   { name: 'Aheadwy', type: 'Sistema de Gestão' },
   { name: 'Cardappo', type: 'Plataforma de Cardápios' },
 ];
 
-const capabilities = [
-  { icon: Code2, text: 'Sistemas Web', description: 'Aplicações completas' },
-  { icon: Database, text: 'Plataformas SaaS', description: 'Escaláveis e seguras' },
-  { icon: Workflow, text: 'Automações', description: 'Fluxos inteligentes' }
-];
-
 const SaaSSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { t } = useLanguage();
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -24,6 +20,12 @@ const SaaSSection = () => {
   });
 
   const y1 = useTransform(scrollYProgress, [0, 1], [80, -80]);
+
+  const capabilities = [
+    { icon: Code2, text: t.saas.capabilities[0].text, description: t.saas.capabilities[0].description },
+    { icon: Database, text: t.saas.capabilities[1].text, description: t.saas.capabilities[1].description },
+    { icon: Workflow, text: t.saas.capabilities[2].text, description: t.saas.capabilities[2].description }
+  ];
 
   return (
     <section id="saas" ref={ref} className="py-24 md:py-40 bg-background relative overflow-hidden">
@@ -55,23 +57,22 @@ const SaaSSection = () => {
                 className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 mb-6"
               >
                 <Layers size={16} />
-                <span className="text-sm font-bold uppercase tracking-wider">Soluções Avançadas</span>
+                <span className="text-sm font-bold uppercase tracking-wider">{t.saas.badge}</span>
               </motion.div>
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Precisa de algo
+                {t.saas.title1}
                 <br />
-                mais <span className="font-display italic text-primary">complexo</span>?
+                {t.saas.title2} <span className="font-display italic text-primary">{t.saas.title3}</span>?
               </h2>
 
               <p className="text-lg text-muted-foreground mb-8">
-                Desenvolvemos <strong className="text-foreground">sistemas Web e SaaS sob medida</strong> para 
-                necessidades específicas. Desde plataformas de gestão até marketplaces completos.
+                {t.saas.description1} <strong className="text-foreground">{t.saas.descriptionHighlight}</strong> {t.saas.description2}
               </p>
 
               {/* Portfolio mention */}
               <div className="flex flex-wrap items-center gap-4 mb-10">
-                <span className="text-sm text-muted-foreground">Cases de sucesso:</span>
+                <span className="text-sm text-muted-foreground">{t.saas.cases}</span>
                 {projects.map((project, index) => (
                   <motion.div 
                     key={project.name}
@@ -97,7 +98,7 @@ const SaaSSection = () => {
                   whileTap={{ scale: 0.98 }}
                   className="inline-flex items-center gap-3 btn-brutal"
                 >
-                  Falar sobre meu projeto
+                  {t.saas.cta}
                   <motion.span
                     animate={{ x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}

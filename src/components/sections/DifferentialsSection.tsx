@@ -1,6 +1,7 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Zap, Shield, Rocket, Code2, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 const technologies = [
   { name: 'React', color: '#61DAFB' },
@@ -8,30 +9,10 @@ const technologies = [
   { name: 'Supabase', color: '#3ECF8E' },
 ];
 
-const differentials = [
-  {
-    icon: Zap,
-    number: '01',
-    title: 'Zero Dívida Técnica',
-    description: 'Código limpo e documentado que facilita manutenção e evolução futura.',
-  },
-  {
-    icon: Rocket,
-    number: '02',
-    title: 'Performance Máxima',
-    description: 'Sites com tempo de carregamento inferior a 1 segundo.',
-  },
-  {
-    icon: Shield,
-    number: '03',
-    title: 'Segurança Garantida',
-    description: 'SSL, autenticação robusta e proteção contra vulnerabilidades.',
-  },
-];
-
 const DifferentialsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { t } = useLanguage();
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -39,7 +20,27 @@ const DifferentialsSection = () => {
   });
 
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-  const y1 = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+
+  const differentials = [
+    {
+      icon: Zap,
+      number: '01',
+      title: t.differentials.featureTitle,
+      description: t.differentials.featureDescription,
+    },
+    {
+      icon: Rocket,
+      number: '02',
+      title: t.differentials.cards[0].title,
+      description: t.differentials.cards[0].description,
+    },
+    {
+      icon: Shield,
+      number: '03',
+      title: t.differentials.cards[1].title,
+      description: t.differentials.cards[1].description,
+    },
+  ];
 
   return (
     <section 
@@ -72,18 +73,17 @@ const DifferentialsSection = () => {
               className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 mb-6"
             >
               <Code2 size={16} />
-              <span className="text-sm font-bold uppercase tracking-wider">Stack Moderna</span>
+              <span className="text-sm font-bold uppercase tracking-wider">{t.differentials.badge}</span>
             </motion.div>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              Tecnologia que
+              {t.differentials.title1}
               <br />
-              <span className="font-display italic text-primary-glow">Escala</span>
+              <span className="font-display italic text-primary-glow">{t.differentials.title2}</span>
             </h2>
 
             <p className="text-lg text-white/60 max-w-md">
-              Utilizamos as tecnologias mais modernas do mercado para garantir 
-              performance, segurança e escalabilidade.
+              {t.differentials.description}
             </p>
           </motion.div>
 

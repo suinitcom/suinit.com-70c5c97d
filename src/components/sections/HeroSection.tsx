@@ -1,11 +1,13 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useRef } from 'react';
 import MagneticButton from '../ui/MagneticButton';
 import Marquee from '../ui/Marquee';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -13,7 +15,6 @@ const HeroSection = () => {
   });
 
   // Parallax effects
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   const textY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
@@ -22,19 +23,6 @@ const HeroSection = () => {
   const smoothTextY = useSpring(textY, { stiffness: 100, damping: 30 });
   const smoothOpacity = useSpring(opacity, { stiffness: 100, damping: 30 });
   const smoothScale = useSpring(scale, { stiffness: 100, damping: 30 });
-
-  const marqueeItems = [
-    'Web Development',
-    '✦',
-    'UI/UX Design',
-    '✦',
-    'SaaS Solutions',
-    '✦',
-    'Performance',
-    '✦',
-    'Innovation',
-    '✦',
-  ];
 
   return (
     <section 
@@ -67,17 +55,6 @@ const HeroSection = () => {
         style={{ y: smoothTextY, opacity: smoothOpacity, scale: smoothScale }}
       >
         <div className="max-w-6xl mx-auto w-full">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2.5 mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-primary-glow" />
-            <span className="text-white/90 text-sm font-medium">Agência de Desenvolvimento Premium</span>
-          </motion.div>
-
           {/* Main Headline with creative typography */}
           <div className="grid lg:grid-cols-[1fr,auto] gap-8 lg:gap-16 items-center mb-12">
             <div>
@@ -92,7 +69,7 @@ const HeroSection = () => {
                   transition={{ duration: 0.8, delay: 0.1 }}
                   className="block"
                 >
-                  Sistemas que
+                  {t.hero.headline1}
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, y: 60 }}
@@ -100,7 +77,7 @@ const HeroSection = () => {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="block"
                 >
-                  impulsionam
+                  {t.hero.headline2}
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -108,7 +85,7 @@ const HeroSection = () => {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="block relative inline-flex items-center"
                 >
-                  <span className="font-display italic text-primary-glow">resultados</span>
+                  <span className="font-display italic text-primary-glow">{t.hero.headline3}</span>
                   <motion.svg 
                     viewBox="0 0 200 20" 
                     className="absolute -bottom-2 left-0 w-full h-auto"
@@ -136,9 +113,9 @@ const HeroSection = () => {
                 transition={{ duration: 0.7, delay: 0.5 }}
                 className="text-lg md:text-xl text-white/70 max-w-xl mb-10"
               >
-                Desenvolvemos soluções web com foco em ROI, escalabilidade e 
-                <span className="text-white font-medium"> zero dívida técnica</span>. 
-                Seu negócio merece tecnologia que gera retorno.
+                {t.hero.description}
+                <span className="text-white font-medium"> {t.hero.descriptionHighlight}</span>
+                {t.hero.descriptionEnd}
               </motion.p>
 
               {/* CTAs */}
@@ -158,7 +135,7 @@ const HeroSection = () => {
                     className="group flex items-center gap-3 btn-brutal bg-white text-primary"
                   >
                     <MessageCircle size={20} />
-                    Falar com Especialista
+                    {t.hero.ctaPrimary}
                     <motion.span
                       className="inline-block"
                       animate={{ x: [0, 5, 0] }}
@@ -175,7 +152,7 @@ const HeroSection = () => {
                   whileTap={{ scale: 0.98 }}
                   className="flex items-center gap-2 text-white font-semibold px-8 py-4 border-2 border-white/30 hover:bg-white/10 transition-all duration-300"
                 >
-                  Ver Planos
+                  {t.hero.ctaSecondary}
                 </motion.a>
               </motion.div>
             </div>
@@ -212,9 +189,8 @@ const HeroSection = () => {
             className="flex flex-wrap items-center gap-8 md:gap-12"
           >
             {[
-              { value: '50+', label: 'Projetos' },
-              { value: '99.9%', label: 'Uptime' },
-              { value: '<1s', label: 'Load Time' }
+              { value: '99.9%', label: t.hero.stats.uptime },
+              { value: '<1s', label: t.hero.stats.loadTime }
             ].map((stat, index) => (
               <motion.div 
                 key={stat.label}
@@ -246,7 +222,7 @@ const HeroSection = () => {
         className="relative z-10 py-6 border-t border-white/10 bg-black/20 backdrop-blur-sm"
       >
         <Marquee speed={25} className="text-white/80 text-lg md:text-xl font-medium">
-          {marqueeItems.map((item, index) => (
+          {t.hero.marquee.map((item, index) => (
             <span key={index} className="mx-4 md:mx-8">
               {item}
             </span>
