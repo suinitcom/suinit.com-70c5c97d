@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Mail, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 const ContactSection = () => {
@@ -10,16 +10,19 @@ const ContactSection = () => {
 
   const content = {
     pt: {
-      heading: 'Tem um projeto em mente?',
-      subheading: 'Vamos conversar.',
+      heading: 'Pare de herdar problemas técnicos.',
+      subheading: 'Comece a construir o futuro da sua empresa com a Suinit.',
+      cta: 'Falar com um Especialista',
     },
     en: {
-      heading: 'Got a project in mind?',
-      subheading: 'Let\'s talk.',
+      heading: 'Stop inheriting technical problems.',
+      subheading: "Start building your company's future with Suinit.",
+      cta: 'Talk to a Specialist',
     },
     es: {
-      heading: '¿Tienes un proyecto en mente?',
-      subheading: 'Hablemos.',
+      heading: 'Deja de heredar problemas técnicos.',
+      subheading: 'Empieza a construir el futuro de tu empresa con Suinit.',
+      cta: 'Hablar con un Especialista',
     },
   };
 
@@ -34,7 +37,7 @@ const ContactSection = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4"
+            className="text-3xl md:text-5xl lg:text-6xl font-display font-bold mb-4"
           >
             {text.heading}
           </motion.h2>
@@ -43,36 +46,25 @@ const ContactSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-display font-bold text-background/60 mb-16"
+            className="text-xl md:text-2xl text-background/70 mb-12"
           >
             {text.subheading}
           </motion.p>
 
-          {/* Contact Links */}
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            {/* Email */}
-            <a
-              href="mailto:contato@suinit.com"
-              className="group flex items-center gap-3 bg-background text-foreground px-8 py-5 font-display font-semibold transition-all hover:bg-background/90"
-            >
-              <Mail size={20} />
-              contato@suinit.com
-            </a>
-
-            {/* WhatsApp */}
             <a
               href="https://wa.me/5511933336922"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 border-2 border-background text-background px-8 py-5 font-display font-semibold transition-all hover:bg-background hover:text-foreground"
+              className="inline-flex items-center gap-3 bg-background text-foreground px-10 py-5 font-display font-semibold text-lg transition-all hover:bg-background/90"
             >
-              <MessageCircle size={20} />
-              WhatsApp
+              <MessageCircle size={24} />
+              {text.cta}
             </a>
           </motion.div>
         </div>

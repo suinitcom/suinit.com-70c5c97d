@@ -12,19 +12,19 @@ const ServicesSection = () => {
       label: 'SERVIÇOS',
       services: [
         {
-          title: 'Design',
-          description: 'UI/UX design, design de interfaces, prototipagem. Criamos soluções digitais que mantêm seus clientes engajados com seu produto.',
-          extra: 'Se precisar de branding, fale conosco também!',
+          title: 'Design & Branding',
+          description: 'Design de interface focado em conversão e manuais de marca que posicionam sua empresa no topo.',
+          extra: 'UI/UX, identidade visual e sistemas de design.',
         },
         {
-          title: 'Desenvolvimento',
-          description: 'Sites, sistemas web, aplicações SaaS. Transformamos pixels perfeitos em experiências online incríveis usando tecnologias modernas.',
-          extra: 'React, Next.js, TypeScript, Node.js e muito mais.',
+          title: 'Desenvolvimento de Elite',
+          description: 'Aplicações SaaS e sistemas web robustos usando Next.js, TypeScript e Node.js. Código feito para durar.',
+          extra: 'Zero dívida técnica garantida.',
         },
         {
-          title: 'Manutenção',
-          description: 'Hospedagem edge, SSL, suporte técnico, atualizações de segurança. Mantemos seu sistema funcionando 24/7 sem preocupações.',
-          extra: 'Planos mensais que cabem no seu bolso.',
+          title: 'Manutenção & Infra',
+          description: 'Hospedagem em edge e suporte crítico. Cuidamos do técnico para você focar no negócio.',
+          extra: 'Uptime 99.9% e monitoramento 24/7.',
         },
       ],
     },
@@ -32,19 +32,19 @@ const ServicesSection = () => {
       label: 'SERVICES',
       services: [
         {
-          title: 'Design',
-          description: 'UI/UX design, interface design, prototyping. We create digital solutions that keep your clients engaged with your product.',
-          extra: 'If you need branding, talk to us too!',
+          title: 'Design & Branding',
+          description: 'Conversion-focused interface design and brand manuals that position your company at the top.',
+          extra: 'UI/UX, visual identity and design systems.',
         },
         {
-          title: 'Development',
-          description: 'Websites, web systems, SaaS applications. We transform perfect pixels into amazing online experiences using modern technologies.',
-          extra: 'React, Next.js, TypeScript, Node.js and much more.',
+          title: 'Elite Development',
+          description: 'Robust SaaS applications and web systems using Next.js, TypeScript and Node.js. Code built to last.',
+          extra: 'Zero technical debt guaranteed.',
         },
         {
-          title: 'Maintenance',
-          description: 'Edge hosting, SSL, technical support, security updates. We keep your system running 24/7 without worries.',
-          extra: 'Monthly plans that fit your budget.',
+          title: 'Maintenance & Infra',
+          description: 'Edge hosting and critical support. We handle the technical so you can focus on business.',
+          extra: '99.9% uptime and 24/7 monitoring.',
         },
       ],
     },
@@ -52,19 +52,19 @@ const ServicesSection = () => {
       label: 'SERVICIOS',
       services: [
         {
-          title: 'Diseño',
-          description: 'Diseño UI/UX, diseño de interfaces, prototipado. Creamos soluciones digitales que mantienen a tus clientes comprometidos con tu producto.',
-          extra: '¡Si necesitas branding, habla con nosotros también!',
+          title: 'Diseño & Branding',
+          description: 'Diseño de interfaz enfocado en conversión y manuales de marca que posicionan tu empresa en la cima.',
+          extra: 'UI/UX, identidad visual y sistemas de diseño.',
         },
         {
-          title: 'Desarrollo',
-          description: 'Sitios web, sistemas web, aplicaciones SaaS. Transformamos píxeles perfectos en experiencias online increíbles usando tecnologías modernas.',
-          extra: 'React, Next.js, TypeScript, Node.js y mucho más.',
+          title: 'Desarrollo de Élite',
+          description: 'Aplicaciones SaaS y sistemas web robustos usando Next.js, TypeScript y Node.js. Código hecho para durar.',
+          extra: 'Cero deuda técnica garantizada.',
         },
         {
-          title: 'Mantenimiento',
-          description: 'Hosting edge, SSL, soporte técnico, actualizaciones de seguridad. Mantenemos tu sistema funcionando 24/7 sin preocupaciones.',
-          extra: 'Planes mensuales que caben en tu bolsillo.',
+          title: 'Mantenimiento & Infra',
+          description: 'Hosting en edge y soporte crítico. Nos encargamos de lo técnico para que te enfoques en el negocio.',
+          extra: 'Uptime 99.9% y monitoreo 24/7.',
         },
       ],
     },
@@ -95,13 +95,13 @@ const ServicesSection = () => {
               transition={{ duration: 0.6, delay: 0.1 * index }}
               className="service-card group"
             >
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6 group-hover:text-accent transition-colors">
+              <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6 group-hover:text-primary transition-colors">
                 {service.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 {service.description}
               </p>
-              <p className="text-sm text-foreground/60 font-medium">
+              <p className="text-sm text-primary font-semibold">
                 {service.extra}
               </p>
             </motion.div>
