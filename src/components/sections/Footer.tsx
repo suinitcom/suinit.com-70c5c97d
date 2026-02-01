@@ -45,7 +45,7 @@ const Footer = () => {
 
             <MagneticButton strength={0.2}>
               <motion.a
-                href="https://wa.me/5500000000000"
+                href="https://wa.me/5511933336922"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
@@ -116,13 +116,15 @@ const Footer = () => {
             >
               <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">{t.footer.contact}</h3>
               <ul className="space-y-3">
-                <li className="flex items-center gap-3 text-white/50 text-sm">
+                <li className="flex items-center gap-3 text-white/50 text-sm hover:text-white transition-colors">
                   <Mail className="w-4 h-4" />
-                  contato@suinit.com
+                  <a href="mailto:contato@suinit.com">contato@suinit.com</a>
                 </li>
-                <li className="flex items-center gap-3 text-white/50 text-sm">
+                <li className="flex items-center gap-3 text-white/50 text-sm hover:text-white transition-colors">
                   <Phone className="w-4 h-4" />
-                  +55 (00) 00000-0000
+                  <a href="https://wa.me/5511933336922" target="_blank" rel="noopener noreferrer">
+                    +55 11 93333-6922
+                  </a>
                 </li>
                 <li className="flex items-start gap-3 text-white/50 text-sm">
                   <MapPin className="w-4 h-4 mt-0.5" />

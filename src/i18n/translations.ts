@@ -37,6 +37,64 @@ export const translations = {
         '✦',
       ],
     },
+    // Stats Bar
+    stats: {
+      rating: 'Avaliação',
+      projects: 'Satisfação',
+      support: 'Suporte',
+      technicalDebt: 'Dívida Técnica',
+    },
+    // Advantages
+    advantages: {
+      badge: 'Nossas Vantagens',
+      title1: 'Por que escolher',
+      title2: 'a Suinit',
+      description: 'Veja os benefícios de trabalhar conosco e como podemos ajudar seu negócio a crescer.',
+      items: [
+        {
+          title: 'Performance Extrema',
+          description: 'Sites ultra-rápidos que carregam em menos de 1 segundo, garantindo a melhor experiência para seus usuários.',
+        },
+        {
+          title: 'Segurança Total',
+          description: 'Proteção de ponta a ponta com SSL, backups automáticos e monitoramento 24/7.',
+        },
+        {
+          title: 'Escalabilidade',
+          description: 'Infraestrutura preparada para crescer junto com seu negócio.',
+        },
+        {
+          title: 'Código Limpo',
+          description: 'Zero dívida técnica. Código documentado e fácil de manter.',
+        },
+        {
+          title: 'SEO Otimizado',
+          description: 'Estrutura otimizada para aparecer no topo do Google.',
+        },
+        {
+          title: 'Hospedagem Edge',
+          description: 'Servidores globais para latência mínima em qualquer lugar do mundo.',
+        },
+      ],
+    },
+    // Testimonials
+    testimonials: {
+      badge: 'Depoimentos',
+      title1: 'Confiado por líderes e criativos',
+      title2: 'de diversas indústrias',
+      testimonial1: {
+        role: 'CEO, Startup Tech',
+        text: 'A Suinit transformou completamente nossa presença digital. O site ficou incrivelmente rápido e as conversões aumentaram 40%.',
+      },
+      testimonial2: {
+        role: 'Diretora de Marketing',
+        text: 'Profissionalismo e qualidade técnica impecáveis. A equipe entregou além das expectativas em tempo recorde.',
+      },
+      testimonial3: {
+        role: 'Fundador, E-commerce',
+        text: 'Finalmente encontrei uma agência que entende de performance. O suporte é excepcional e os resultados são reais.',
+      },
+    },
     // Pain Points
     painPoints: {
       badge: 'O Problema',
@@ -283,6 +341,64 @@ export const translations = {
         '✦',
       ],
     },
+    // Stats Bar
+    stats: {
+      rating: 'Rating',
+      projects: 'Satisfaction',
+      support: 'Support',
+      technicalDebt: 'Technical Debt',
+    },
+    // Advantages
+    advantages: {
+      badge: 'Our Advantages',
+      title1: 'Why choose',
+      title2: 'Suinit',
+      description: 'See the benefits of working with us and how we can help your business grow.',
+      items: [
+        {
+          title: 'Extreme Performance',
+          description: 'Ultra-fast sites that load in less than 1 second, ensuring the best experience for your users.',
+        },
+        {
+          title: 'Total Security',
+          description: 'End-to-end protection with SSL, automatic backups and 24/7 monitoring.',
+        },
+        {
+          title: 'Scalability',
+          description: 'Infrastructure ready to grow with your business.',
+        },
+        {
+          title: 'Clean Code',
+          description: 'Zero technical debt. Documented and easy to maintain code.',
+        },
+        {
+          title: 'SEO Optimized',
+          description: 'Optimized structure to appear at the top of Google.',
+        },
+        {
+          title: 'Edge Hosting',
+          description: 'Global servers for minimal latency anywhere in the world.',
+        },
+      ],
+    },
+    // Testimonials
+    testimonials: {
+      badge: 'Testimonials',
+      title1: 'Trusted by leaders and creatives',
+      title2: 'from various industries',
+      testimonial1: {
+        role: 'CEO, Tech Startup',
+        text: 'Suinit completely transformed our digital presence. The site became incredibly fast and conversions increased by 40%.',
+      },
+      testimonial2: {
+        role: 'Marketing Director',
+        text: 'Impeccable professionalism and technical quality. The team delivered beyond expectations in record time.',
+      },
+      testimonial3: {
+        role: 'Founder, E-commerce',
+        text: 'Finally found an agency that understands performance. Support is exceptional and results are real.',
+      },
+    },
     // Pain Points
     painPoints: {
       badge: 'The Problem',
@@ -528,6 +644,64 @@ export const translations = {
         'Innovation',
         '✦',
       ],
+    },
+    // Stats Bar
+    stats: {
+      rating: 'Calificación',
+      projects: 'Satisfacción',
+      support: 'Soporte',
+      technicalDebt: 'Deuda Técnica',
+    },
+    // Advantages
+    advantages: {
+      badge: 'Nuestras Ventajas',
+      title1: 'Por qué elegir',
+      title2: 'Suinit',
+      description: 'Mira los beneficios de trabajar con nosotros y cómo podemos ayudar a tu negocio a crecer.',
+      items: [
+        {
+          title: 'Rendimiento Extremo',
+          description: 'Sitios ultra-rápidos que cargan en menos de 1 segundo, garantizando la mejor experiencia para tus usuarios.',
+        },
+        {
+          title: 'Seguridad Total',
+          description: 'Protección de extremo a extremo con SSL, backups automáticos y monitoreo 24/7.',
+        },
+        {
+          title: 'Escalabilidad',
+          description: 'Infraestructura preparada para crecer junto con tu negocio.',
+        },
+        {
+          title: 'Código Limpio',
+          description: 'Cero deuda técnica. Código documentado y fácil de mantener.',
+        },
+        {
+          title: 'SEO Optimizado',
+          description: 'Estructura optimizada para aparecer en el top de Google.',
+        },
+        {
+          title: 'Hosting Edge',
+          description: 'Servidores globales para latencia mínima en cualquier lugar del mundo.',
+        },
+      ],
+    },
+    // Testimonials
+    testimonials: {
+      badge: 'Testimonios',
+      title1: 'Confiado por líderes y creativos',
+      title2: 'de diversas industrias',
+      testimonial1: {
+        role: 'CEO, Startup Tech',
+        text: 'Suinit transformó completamente nuestra presencia digital. El sitio quedó increíblemente rápido y las conversiones aumentaron un 40%.',
+      },
+      testimonial2: {
+        role: 'Directora de Marketing',
+        text: 'Profesionalismo y calidad técnica impecables. El equipo entregó más allá de las expectativas en tiempo récord.',
+      },
+      testimonial3: {
+        role: 'Fundador, E-commerce',
+        text: 'Por fin encontré una agencia que entiende de rendimiento. El soporte es excepcional y los resultados son reales.',
+      },
     },
     // Pain Points
     painPoints: {
