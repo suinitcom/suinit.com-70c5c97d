@@ -1,71 +1,48 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import { Globe, ChevronDown } from 'lucide-react';
-import { useLanguage, Language } from '@/i18n/LanguageContext';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { Globe } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
-const languages: { code: Language; label: string; flag: string }[] = [
+const languages = [
   { code: 'pt', label: 'Português', flag: '🇧🇷' },
   { code: 'en', label: 'English', flag: '🇺🇸' },
   { code: 'es', label: 'Español', flag: '🇪🇸' },
-];
+] as const;
 
 export function LanguageSelector() {
   const { language, setLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
 
-  const currentLang = languages.find(l => l.code === language) || languages[0];
+  const currentLanguage = languages.find((l) => l.code === language);
 
   return (
-    <div className="relative">
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 text-white/70 hover:text-white transition-colors px-3 py-2"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className="flex items-center gap-2 text-foreground/70 hover:text-foreground transition-colors font-display text-sm font-medium">
+          <Globe size={18} />
+          <span className="hidden sm:inline">{currentLanguage?.flag}</span>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent 
+        align="end" 
+        className="bg-background border-border min-w-[140px]"
       >
-        <Globe size={16} />
-        <span className="text-sm font-medium hidden sm:inline">{currentLang.flag}</span>
-        <ChevronDown size={14} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </motion.button>
-
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 z-40"
-              onClick={() => setIsOpen(false)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{ duration: 0.15 }}
-              className="absolute top-full right-0 mt-2 bg-foreground border border-white/10 shadow-xl z-50 min-w-[140px]"
-            >
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => {
-                    setLanguage(lang.code);
-                    setIsOpen(false);
-                  }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors ${
-                    language === lang.code
-                      ? 'bg-primary text-white'
-                      : 'text-white/70 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  <span>{lang.flag}</span>
-                  <span>{lang.label}</span>
-                </button>
-              ))}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </div>
+        {languages.map((lang) => (
+          <DropdownMenuItem
+            key={lang.code}
+            onClick={() => setLanguage(lang.code)}
+            className={`flex items-center gap-3 cursor-pointer font-display ${
+              language === lang.code ? 'text-foreground font-semibold' : 'text-muted-foreground'
+            }`}
+          >
+            <span>{lang.flag}</span>
+            <span>{lang.label}</span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

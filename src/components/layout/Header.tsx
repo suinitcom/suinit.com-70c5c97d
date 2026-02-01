@@ -18,7 +18,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -31,23 +30,22 @@ const Header = () => {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { href: '#solucoes', label: t.nav.solutions },
-    { href: '#diferenciais', label: t.nav.differentials },
-    { href: '#planos', label: t.nav.plans },
-    { href: '#saas', label: t.nav.saas },
+    { href: '#work', label: t.nav.solutions },
+    { href: '#services', label: t.nav.differentials },
+    { href: '#pricing', label: t.nav.plans },
   ];
 
   return (
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          hasScrolled ? 'bg-foreground/95 backdrop-blur-lg py-3' : 'bg-transparent py-5'
+          hasScrolled ? 'bg-background/95 backdrop-blur-md py-4' : 'bg-transparent py-6'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.a
@@ -56,36 +54,33 @@ const Header = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="text-2xl md:text-3xl font-bold text-white">
-                suinit<span className="text-primary-glow">.</span>
+              <span className="text-2xl font-display font-bold text-foreground tracking-tight">
+                suinit<span className="text-accent">.</span>
               </span>
             </motion.a>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-10">
+            <nav className="hidden lg:flex items-center gap-12">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  className="text-white/70 hover:text-white font-medium transition-colors text-sm uppercase tracking-wider relative group"
+                  className="text-foreground/70 hover:text-foreground font-display font-medium transition-colors text-sm uppercase tracking-widest link-underline"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index, duration: 0.5 }}
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-glow group-hover:w-full transition-all duration-300" />
                 </motion.a>
               ))}
             </nav>
 
             {/* Right side: Language + CTA */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-6">
               <LanguageSelector />
               <motion.a
-                href="https://wa.me/5500000000000"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white text-primary font-bold px-6 py-3 hover:bg-primary-glow hover:text-white transition-all duration-300"
+                href="#contact"
+                className="btn-primary text-sm"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
@@ -99,11 +94,11 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden relative z-[60] w-10 h-10 flex items-center justify-center text-white"
+              className="lg:hidden relative z-[60] w-12 h-12 flex items-center justify-center text-foreground"
               whileTap={{ scale: 0.95 }}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </motion.button>
           </div>
         </div>
@@ -113,16 +108,15 @@ const Header = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="lg:hidden fixed inset-0 bg-foreground z-50"
+            className="lg:hidden fixed inset-0 bg-background z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Close button inside menu */}
             <motion.button
               onClick={() => setIsMenuOpen(false)}
-              className="absolute top-5 right-4 z-[60] w-10 h-10 flex items-center justify-center text-white"
+              className="absolute top-6 right-6 z-[60] w-12 h-12 flex items-center justify-center text-foreground"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -130,45 +124,42 @@ const Header = () => {
               whileTap={{ scale: 0.95 }}
               aria-label="Close menu"
             >
-              <X size={24} />
+              <X size={28} />
             </motion.button>
 
-            <div className="flex flex-col items-center justify-center h-full gap-8 px-8">
+            <div className="flex flex-col items-start justify-center h-full gap-8 px-12">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-3xl font-bold text-white hover:text-primary-glow transition-colors"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
+                  className="text-5xl font-display font-bold text-foreground hover:text-accent transition-colors"
+                  initial={{ opacity: 0, x: -40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -40 }}
                   transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}
                 >
                   {link.label}
                 </motion.a>
               ))}
               
-              {/* Language selector in mobile */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
                 transition={{ delay: 0.25, duration: 0.3 }}
-                className="mt-4"
+                className="mt-8"
               >
                 <LanguageSelector />
               </motion.div>
 
               <motion.a
-                href="https://wa.me/5500000000000"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contact"
                 onClick={() => setIsMenuOpen(false)}
-                className="mt-4 bg-white text-primary font-bold px-8 py-4 text-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
+                className="btn-primary mt-4 text-lg"
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
                 transition={{ delay: 0.3, duration: 0.3 }}
               >
                 {t.nav.cta}
