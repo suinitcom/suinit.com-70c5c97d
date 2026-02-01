@@ -117,13 +117,13 @@
 }
 
 @layer components {
-  /* Primary button - solid black */
+  /* Primary button - Suinit Blue */
   .btn-primary {
-    @apply bg-foreground text-background font-display font-semibold px-8 py-4 transition-all duration-300 border-2 border-foreground;
+    @apply bg-primary text-primary-foreground font-display font-semibold px-8 py-4 transition-all duration-300;
   }
 
   .btn-primary:hover {
-    @apply bg-background text-foreground;
+    @apply bg-primary/90;
   }
 
   /* Outline button */
