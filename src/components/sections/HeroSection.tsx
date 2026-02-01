@@ -127,7 +127,7 @@ const HeroSection = () => {
               >
                 <MagneticButton strength={0.2}>
                   <motion.a
-                    href="https://wa.me/5500000000000"
+                    href="https://wa.me/5511933336922"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02 }}
