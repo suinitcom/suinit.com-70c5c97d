@@ -71,29 +71,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Geometric Shapes at Bottom - MDC Style */}
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="container mx-auto px-6 md:px-12"
-      >
-        <div className="flex items-end gap-2 md:gap-3 h-40 md:h-64">
-          {/* Rectangle 1 */}
-          <div className="shape-square w-16 md:w-24 h-full" />
-          {/* Rectangle 2 */}
-          <div className="shape-square w-12 md:w-20 h-full" />
-          {/* Rectangle 3 */}
-          <div className="shape-square w-16 md:w-24 h-full" />
-          {/* Half Circle */}
-          <div 
-            className="bg-foreground w-24 md:w-40 h-full"
-            style={{ borderRadius: '0 100% 100% 0 / 0 50% 50% 0' }}
-          />
-          {/* Circle */}
-          <div className="shape-circle w-16 md:w-28 h-16 md:h-28 mb-4" />
-        </div>
-      </motion.div>
     </section>
   );
 };

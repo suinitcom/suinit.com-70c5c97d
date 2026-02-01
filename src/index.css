@@ -18,12 +18,9 @@
     --popover: 45 33% 97%;
     --popover-foreground: 0 0% 8%;
 
-    /* Primary: Near black */
-    --primary: 0 0% 8%;
-    --primary-foreground: 45 33% 97%;
-
-    /* Accent: Blue from Suinit brand */
-    --accent-blue: 225 95% 31%;
+    /* Primary: Suinit Blue #042698 */
+    --primary: 225 95% 31%;
+    --primary-foreground: 0 0% 100%;
     
     --secondary: 45 20% 92%;
     --secondary-foreground: 0 0% 8%;
@@ -33,6 +30,8 @@
 
     --accent: 225 95% 31%;
     --accent-foreground: 0 0% 100%;
+    
+    --ring: 225 95% 31%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
