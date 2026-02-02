@@ -1,6 +1,6 @@
 import Header from '@/components/layout/Header';
 import HeroSection from '@/components/sections/HeroSection';
-import ZeroDebtSection from '@/components/sections/ZeroDebtSection';
+import WhyDoesntSellSection from '@/components/sections/WhyDoesntSellSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import PricingSection from '@/components/sections/PricingSection';
 import ContactSection from '@/components/sections/ContactSection';
@@ -11,7 +11,7 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <Header />
       <HeroSection />
-      <ZeroDebtSection />
+      <WhyDoesntSellSection />
       <ServicesSection />
       <PricingSection />
       <ContactSection />

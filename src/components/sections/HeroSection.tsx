@@ -7,25 +7,25 @@ const HeroSection = () => {
 
   const content = {
     pt: {
-      label: 'DESIGN & DESENVOLVIMENTO',
-      headline: 'Sistemas que escalam sem deixar dívidas.',
-      subheadline: 'O mercado está cheio de sistemas "remendados". Na Suinit, entregamos software de alta performance com Zero Dívida Técnica. Sua empresa ganha velocidade, código limpo e total propriedade do projeto.',
-      ctaPrimary: 'Iniciar meu projeto',
-      ctaSecondary: 'Entenda nossa metodologia',
+      label: 'SITES & PRESENÇA DIGITAL',
+      headline: 'Um site que não é apenas bonito. Um site que traz clientes.',
+      subheadline: 'Pare de perder oportunidades com um site que ninguém visita ou que não converte. Criamos sites profissionais focados em uma única coisa: colocar o seu cliente em contato com você.',
+      ctaPrimary: 'Quero vender mais',
+      ctaSecondary: 'Conheça nossa estratégia',
     },
     en: {
-      label: 'DESIGN & DEVELOPMENT',
-      headline: 'Systems that scale without leaving debts.',
-      subheadline: 'The market is full of "patched" systems. At Suinit, we deliver high-performance software with Zero Technical Debt. Your company gains speed, clean code, and full project ownership.',
-      ctaPrimary: 'Start my project',
-      ctaSecondary: 'Understand our methodology',
+      label: 'WEBSITES & DIGITAL PRESENCE',
+      headline: "A website that's not just beautiful. A website that brings clients.",
+      subheadline: "Stop losing opportunities with a website no one visits or that doesn't convert. We create professional websites focused on one thing: putting your customer in touch with you.",
+      ctaPrimary: 'I want to sell more',
+      ctaSecondary: 'Learn our strategy',
     },
     es: {
-      label: 'DISEÑO Y DESARROLLO',
-      headline: 'Sistemas que escalan sin dejar deudas.',
-      subheadline: 'El mercado está lleno de sistemas "remendados". En Suinit, entregamos software de alto rendimiento con Cero Deuda Técnica. Tu empresa gana velocidad, código limpio y propiedad total del proyecto.',
-      ctaPrimary: 'Iniciar mi proyecto',
-      ctaSecondary: 'Entiende nuestra metodología',
+      label: 'SITIOS WEB & PRESENCIA DIGITAL',
+      headline: 'Un sitio que no es solo bonito. Un sitio que trae clientes.',
+      subheadline: 'Deja de perder oportunidades con un sitio que nadie visita o que no convierte. Creamos sitios profesionales enfocados en una sola cosa: poner a tu cliente en contacto contigo.',
+      ctaPrimary: 'Quiero vender más',
+      ctaSecondary: 'Conoce nuestra estrategia',
     },
   };
 
@@ -49,10 +49,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="heading-display text-[clamp(2.5rem,8vw,6rem)] max-w-5xl leading-[1.1]"
+          className="heading-display text-[clamp(2.5rem,8vw,5rem)] max-w-5xl leading-[1.1]"
         >
-          {text.headline.split(' ').slice(0, -1).join(' ')}{' '}
-          <span className="text-primary">{text.headline.split(' ').slice(-1)}</span>
+          {text.headline}
         </motion.h1>
 
         {/* Subheadline */}
@@ -82,7 +81,7 @@ const HeroSection = () => {
             <ArrowRight size={18} />
           </a>
           <a
-            href="#zero-debt"
+            href="#why-doesnt-sell"
             className="btn-outline flex items-center justify-center gap-2"
           >
             {text.ctaSecondary}

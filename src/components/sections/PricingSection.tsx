@@ -1,62 +1,68 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Check, ArrowRight } from 'lucide-react';
-import { useLanguage } from '@/i18n/LanguageContext';
+import { useLanguage, formatPrice } from '@/i18n/LanguageContext';
+
+// Base prices in USD
+const BASE_PRICES = {
+  essential: 97,
+  growth: 194, // Double of essential
+};
 
 const PricingSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const { language } = useLanguage();
+  const { language, exchangeRate } = useLanguage();
 
   const content = {
     pt: {
       label: 'PLANOS',
-      heading: 'Investimento transparente para resultados reais',
-      note: 'Todos os planos incluem Taxa de Setup Inicial para garantir a entrega de Zero Dívida Técnica.',
-      cta: 'Começar agora',
+      heading: 'Escolha o plano ideal para seu negócio',
+      note: 'Todos os planos incluem Taxa de Setup Inicial. Com ela, garantimos a entrega de arquivos editáveis, código documentado e Zero Dívida Técnica — você é dono de tudo.',
+      cta: 'Quero esse plano',
       ctaEnterprise: 'Falar com especialista',
       monthly: '/mês',
       plans: [
         {
           id: 'essential',
           name: 'Essencial',
-          price: 'R$ 504',
-          focus: 'Estabilidade',
-          description: 'Ideal para quem já tem um produto e quer segurança e performance absoluta.',
+          priceUsd: BASE_PRICES.essential,
+          focus: 'Presença Profissional',
+          description: 'Ideal para empresas que precisam de uma presença profissional, segura e rápida na internet.',
           features: [
+            'Site institucional moderno',
             'Hospedagem Edge de alta performance',
             'Certificado SSL incluso',
-            'Suporte técnico crítico',
             'Backups automáticos diários',
-            'Monitoramento de uptime',
+            'Suporte técnico por email',
           ],
         },
         {
           id: 'growth',
           name: 'Growth',
-          price: 'R$ 1.024',
-          focus: 'Evolução',
-          description: 'Integrações, SEO avançado e relatórios para quem está em fase de tração.',
+          priceUsd: BASE_PRICES.growth,
+          focus: 'Geração de Leads',
+          description: 'Foco total em Geração de Leads. SEO para ser encontrado e integração com seu CRM para não perder nenhum contato.',
           features: [
             'Tudo do plano Essencial',
-            'Integração com CRM e ferramentas',
             'SEO On-page avançado',
+            'Integração com CRM e ferramentas',
             'Relatórios mensais de performance',
             'Suporte prioritário',
-            'Atualizações de segurança proativas',
+            'Landing pages otimizadas',
           ],
           popular: true,
         },
         {
           id: 'enterprise',
           name: 'Enterprise',
-          price: null,
-          focus: 'Complexidade',
-          description: 'Arquiteturas customizadas e suporte dedicado 24/7 para operações críticas.',
+          priceUsd: null,
+          focus: 'Escala',
+          description: 'Soluções robustas e sistemas específicos para operações maiores que precisam de escala.',
           features: [
             'Tudo do plano Growth',
-            'Arquitetura customizada',
-            'Sistemas SaaS complexos',
+            'Sistemas web customizados',
+            'Integrações avançadas',
             'Infraestrutura dedicada',
             'Gerente de conta dedicado',
             'Suporte 24/7',
@@ -66,52 +72,52 @@ const PricingSection = () => {
     },
     en: {
       label: 'PRICING',
-      heading: 'Transparent investment for real results',
-      note: 'All plans include an Initial Setup Fee to ensure Zero Technical Debt delivery.',
-      cta: 'Get started',
+      heading: 'Choose the ideal plan for your business',
+      note: 'All plans include an Initial Setup Fee. With it, we guarantee the delivery of editable files, documented code, and Zero Technical Debt — you own everything.',
+      cta: 'I want this plan',
       ctaEnterprise: 'Talk to specialist',
       monthly: '/month',
       plans: [
         {
           id: 'essential',
           name: 'Essential',
-          price: '$97',
-          focus: 'Stability',
-          description: 'Ideal for those who already have a product and want absolute security and performance.',
+          priceUsd: BASE_PRICES.essential,
+          focus: 'Professional Presence',
+          description: 'Ideal for companies that need a professional, secure and fast presence on the internet.',
           features: [
+            'Modern institutional website',
             'High performance Edge hosting',
             'SSL certificate included',
-            'Critical technical support',
             'Daily automatic backups',
-            'Uptime monitoring',
+            'Email technical support',
           ],
         },
         {
           id: 'growth',
           name: 'Growth',
-          price: '$197',
-          focus: 'Evolution',
-          description: 'Integrations, advanced SEO and reports for those in traction phase.',
+          priceUsd: BASE_PRICES.growth,
+          focus: 'Lead Generation',
+          description: 'Total focus on Lead Generation. SEO to be found and CRM integration so you never lose a contact.',
           features: [
             'Everything from Essential',
-            'CRM and tools integration',
             'Advanced On-page SEO',
+            'CRM and tools integration',
             'Monthly performance reports',
             'Priority support',
-            'Proactive security updates',
+            'Optimized landing pages',
           ],
           popular: true,
         },
         {
           id: 'enterprise',
           name: 'Enterprise',
-          price: null,
-          focus: 'Complexity',
-          description: 'Custom architectures and dedicated 24/7 support for critical operations.',
+          priceUsd: null,
+          focus: 'Scale',
+          description: 'Robust solutions and specific systems for larger operations that need scale.',
           features: [
             'Everything from Growth',
-            'Custom architecture',
-            'Complex SaaS systems',
+            'Custom web systems',
+            'Advanced integrations',
             'Dedicated infrastructure',
             'Dedicated account manager',
             '24/7 support',
@@ -121,52 +127,52 @@ const PricingSection = () => {
     },
     es: {
       label: 'PRECIOS',
-      heading: 'Inversión transparente para resultados reales',
-      note: 'Todos los planes incluyen Tarifa de Setup Inicial para garantizar la entrega de Cero Deuda Técnica.',
-      cta: 'Comenzar ahora',
+      heading: 'Elige el plan ideal para tu negocio',
+      note: 'Todos los planes incluyen Tarifa de Setup Inicial. Con ella, garantizamos la entrega de archivos editables, código documentado y Cero Deuda Técnica — tú eres dueño de todo.',
+      cta: 'Quiero este plan',
       ctaEnterprise: 'Hablar con especialista',
       monthly: '/mes',
       plans: [
         {
           id: 'essential',
           name: 'Esencial',
-          price: '$97',
-          focus: 'Estabilidad',
-          description: 'Ideal para quienes ya tienen un producto y quieren seguridad y rendimiento absoluto.',
+          priceUsd: BASE_PRICES.essential,
+          focus: 'Presencia Profesional',
+          description: 'Ideal para empresas que necesitan una presencia profesional, segura y rápida en internet.',
           features: [
+            'Sitio institucional moderno',
             'Hosting Edge de alto rendimiento',
             'Certificado SSL incluido',
-            'Soporte técnico crítico',
             'Backups automáticos diarios',
-            'Monitoreo de uptime',
+            'Soporte técnico por email',
           ],
         },
         {
           id: 'growth',
           name: 'Growth',
-          price: '$197',
-          focus: 'Evolución',
-          description: 'Integraciones, SEO avanzado e informes para quienes están en fase de tracción.',
+          priceUsd: BASE_PRICES.growth,
+          focus: 'Generación de Leads',
+          description: 'Enfoque total en Generación de Leads. SEO para ser encontrado e integración con tu CRM para no perder ningún contacto.',
           features: [
             'Todo del plan Esencial',
-            'Integración con CRM y herramientas',
             'SEO On-page avanzado',
+            'Integración con CRM y herramientas',
             'Informes mensuales de rendimiento',
             'Soporte prioritario',
-            'Actualizaciones de seguridad proactivas',
+            'Landing pages optimizadas',
           ],
           popular: true,
         },
         {
           id: 'enterprise',
           name: 'Enterprise',
-          price: null,
-          focus: 'Complejidad',
-          description: 'Arquitecturas personalizadas y soporte dedicado 24/7 para operaciones críticas.',
+          priceUsd: null,
+          focus: 'Escala',
+          description: 'Soluciones robustas y sistemas específicos para operaciones mayores que necesitan escala.',
           features: [
             'Todo del plan Growth',
-            'Arquitectura personalizada',
-            'Sistemas SaaS complejos',
+            'Sistemas web personalizados',
+            'Integraciones avanzadas',
             'Infraestructura dedicada',
             'Gerente de cuenta dedicado',
             'Soporte 24/7',
@@ -232,10 +238,10 @@ const PricingSection = () => {
                 
                 {/* Price */}
                 <div className="flex items-baseline gap-1">
-                  {plan.price ? (
+                  {plan.priceUsd ? (
                     <>
                       <span className="text-4xl md:text-5xl font-display font-bold text-foreground">
-                        {plan.price}
+                        {formatPrice(plan.priceUsd, language, exchangeRate)}
                       </span>
                       <span className="text-muted-foreground">{text.monthly}</span>
                     </>
@@ -272,7 +278,7 @@ const PricingSection = () => {
                     : 'border-2 border-foreground text-foreground hover:bg-foreground hover:text-background'
                 }`}
               >
-                {plan.price ? text.cta : text.ctaEnterprise}
+                {plan.priceUsd ? text.cta : text.ctaEnterprise}
                 <ArrowRight size={18} />
               </a>
             </motion.div>
