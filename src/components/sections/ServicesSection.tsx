@@ -9,62 +9,62 @@ const ServicesSection = () => {
 
   const content = {
     pt: {
-      label: 'SERVIÇOS',
+      label: 'NOSSOS SERVIÇOS',
       services: [
         {
-          title: 'Design & Branding',
-          description: 'Design de interface focado em conversão e manuais de marca que posicionam sua empresa no topo.',
-          extra: 'UI/UX, identidade visual e sistemas de design.',
+          title: 'Design que Atrai',
+          description: 'Não é só estética. Criamos o visual do seu site focado no comportamento do seu cliente para que ele sinta confiança e clique no botão de contato.',
+          extra: 'UI/UX focado em conversão.',
         },
         {
-          title: 'Desenvolvimento de Elite',
-          description: 'Aplicações SaaS e sistemas web robustos usando Next.js, TypeScript e Node.js. Código feito para durar.',
-          extra: 'Zero dívida técnica garantida.',
+          title: 'Sites e Sistemas Web',
+          description: 'Construímos sites rápidos, modernos e que aparecem no Google. De sites institucionais a ferramentas sob medida para o seu negócio.',
+          extra: 'Performance + SEO otimizado.',
         },
         {
-          title: 'Manutenção & Infra',
-          description: 'Hospedagem em edge e suporte crítico. Cuidamos do técnico para você focar no negócio.',
-          extra: 'Uptime 99.9% e monitoramento 24/7.',
+          title: 'Suporte e Evolução',
+          description: 'Seu site sempre no ar, seguro e atualizado. Cuidamos da parte chata (hospedagem e segurança) para você focar no que importa: atender seus novos leads.',
+          extra: 'Uptime 99.9% garantido.',
         },
       ],
     },
     en: {
-      label: 'SERVICES',
+      label: 'OUR SERVICES',
       services: [
         {
-          title: 'Design & Branding',
-          description: 'Conversion-focused interface design and brand manuals that position your company at the top.',
-          extra: 'UI/UX, visual identity and design systems.',
+          title: 'Design that Attracts',
+          description: "It's not just aesthetics. We create your site's visuals focused on your customer's behavior so they feel confident and click the contact button.",
+          extra: 'Conversion-focused UI/UX.',
         },
         {
-          title: 'Elite Development',
-          description: 'Robust SaaS applications and web systems using Next.js, TypeScript and Node.js. Code built to last.',
-          extra: 'Zero technical debt guaranteed.',
+          title: 'Websites & Web Systems',
+          description: 'We build fast, modern websites that show up on Google. From institutional sites to custom-built tools for your business.',
+          extra: 'Performance + SEO optimized.',
         },
         {
-          title: 'Maintenance & Infra',
-          description: 'Edge hosting and critical support. We handle the technical so you can focus on business.',
-          extra: '99.9% uptime and 24/7 monitoring.',
+          title: 'Support & Evolution',
+          description: 'Your site always online, secure, and updated. We handle the boring stuff (hosting and security) so you can focus on what matters: serving your new leads.',
+          extra: '99.9% uptime guaranteed.',
         },
       ],
     },
     es: {
-      label: 'SERVICIOS',
+      label: 'NUESTROS SERVICIOS',
       services: [
         {
-          title: 'Diseño & Branding',
-          description: 'Diseño de interfaz enfocado en conversión y manuales de marca que posicionan tu empresa en la cima.',
-          extra: 'UI/UX, identidad visual y sistemas de diseño.',
+          title: 'Diseño que Atrae',
+          description: 'No es solo estética. Creamos el visual de tu sitio enfocado en el comportamiento de tu cliente para que sienta confianza y haga clic en el botón de contacto.',
+          extra: 'UI/UX enfocado en conversión.',
         },
         {
-          title: 'Desarrollo de Élite',
-          description: 'Aplicaciones SaaS y sistemas web robustos usando Next.js, TypeScript y Node.js. Código hecho para durar.',
-          extra: 'Cero deuda técnica garantizada.',
+          title: 'Sitios y Sistemas Web',
+          description: 'Construimos sitios rápidos, modernos y que aparecen en Google. Desde sitios institucionales hasta herramientas a medida para tu negocio.',
+          extra: 'Performance + SEO optimizado.',
         },
         {
-          title: 'Mantenimiento & Infra',
-          description: 'Hosting en edge y soporte crítico. Nos encargamos de lo técnico para que te enfoques en el negocio.',
-          extra: 'Uptime 99.9% y monitoreo 24/7.',
+          title: 'Soporte y Evolución',
+          description: 'Tu sitio siempre activo, seguro y actualizado. Nos encargamos de lo aburrido (hosting y seguridad) para que te enfoques en lo que importa: atender tus nuevos leads.',
+          extra: 'Uptime 99.9% garantizado.',
         },
       ],
     },

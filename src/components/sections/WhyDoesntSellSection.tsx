@@ -1,77 +1,77 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FileCode, FolderOpen, Rocket } from 'lucide-react';
+import { Zap, Eye, MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 
-const ZeroDebtSection = () => {
+const WhyDoesntSellSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const { language } = useLanguage();
 
   const content = {
     pt: {
-      label: 'DIFERENCIAL',
-      heading: 'O que é Zero Dívida Técnica?',
-      subheading: 'Não apenas entregamos o sistema; entregamos liberdade.',
+      label: 'O PROBLEMA',
+      heading: 'Por que seu site atual não vende?',
+      subheading: 'Ter um site é fácil. Ter um site que trabalha para você 24h por dia é o que nos diferencia.',
       features: [
         {
-          icon: FileCode,
-          title: 'Código Documentado',
-          description: 'Estrutura clara para que qualquer equipe possa assumir.',
+          icon: Zap,
+          title: 'Velocidade',
+          description: 'Se o site demora a carregar, o cliente vai para o concorrente.',
         },
         {
-          icon: FolderOpen,
-          title: 'Arquivos Editáveis',
-          description: 'Você recebe os arquivos de design (UI/UX) e o repositório completo.',
+          icon: Eye,
+          title: 'Clareza',
+          description: 'O cliente entende o que você faz em menos de 5 segundos?',
         },
         {
-          icon: Rocket,
-          title: 'Escalabilidade Real',
-          description: 'Tecnologias modernas que não precisam ser refeitas em 6 meses.',
+          icon: MessageSquare,
+          title: 'Contato Fácil',
+          description: 'Facilitamos o caminho para o seu WhatsApp ou formulário de orçamento.',
         },
       ],
     },
     en: {
-      label: 'DIFFERENTIATOR',
-      heading: 'What is Zero Technical Debt?',
-      subheading: "We don't just deliver the system; we deliver freedom.",
+      label: 'THE PROBLEM',
+      heading: "Why doesn't your current website sell?",
+      subheading: "Having a website is easy. Having a website that works for you 24/7 is what sets us apart.",
       features: [
         {
-          icon: FileCode,
-          title: 'Documented Code',
-          description: 'Clear structure so any team can take over.',
+          icon: Zap,
+          title: 'Speed',
+          description: 'If the site takes too long to load, the customer goes to the competitor.',
         },
         {
-          icon: FolderOpen,
-          title: 'Editable Files',
-          description: 'You receive the design files (UI/UX) and the complete repository.',
+          icon: Eye,
+          title: 'Clarity',
+          description: 'Does the customer understand what you do in less than 5 seconds?',
         },
         {
-          icon: Rocket,
-          title: 'Real Scalability',
-          description: "Modern technologies that don't need to be redone in 6 months.",
+          icon: MessageSquare,
+          title: 'Easy Contact',
+          description: 'We make the path to your WhatsApp or quote form seamless.',
         },
       ],
     },
     es: {
-      label: 'DIFERENCIAL',
-      heading: '¿Qué es Cero Deuda Técnica?',
-      subheading: 'No solo entregamos el sistema; entregamos libertad.',
+      label: 'EL PROBLEMA',
+      heading: '¿Por qué tu sitio actual no vende?',
+      subheading: 'Tener un sitio es fácil. Tener un sitio que trabaja para ti 24h al día es lo que nos diferencia.',
       features: [
         {
-          icon: FileCode,
-          title: 'Código Documentado',
-          description: 'Estructura clara para que cualquier equipo pueda asumir.',
+          icon: Zap,
+          title: 'Velocidad',
+          description: 'Si el sitio tarda en cargar, el cliente se va con la competencia.',
         },
         {
-          icon: FolderOpen,
-          title: 'Archivos Editables',
-          description: 'Recibes los archivos de diseño (UI/UX) y el repositorio completo.',
+          icon: Eye,
+          title: 'Claridad',
+          description: '¿El cliente entiende lo que haces en menos de 5 segundos?',
         },
         {
-          icon: Rocket,
-          title: 'Escalabilidad Real',
-          description: 'Tecnologías modernas que no necesitan ser rehechas en 6 meses.',
+          icon: MessageSquare,
+          title: 'Contacto Fácil',
+          description: 'Facilitamos el camino hacia tu WhatsApp o formulario de presupuesto.',
         },
       ],
     },
@@ -80,7 +80,7 @@ const ZeroDebtSection = () => {
   const text = content[language];
 
   return (
-    <section id="zero-debt" ref={ref} className="py-32 md:py-48 bg-primary text-primary-foreground">
+    <section id="why-doesnt-sell" ref={ref} className="py-32 md:py-48 bg-primary text-primary-foreground">
       <div className="container mx-auto px-6 md:px-12">
         {/* Label */}
         <motion.p
@@ -138,4 +138,4 @@ const ZeroDebtSection = () => {
   );
 };
 
-export default ZeroDebtSection;
+export default WhyDoesntSellSection;

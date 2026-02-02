@@ -10,19 +10,19 @@ const ContactSection = () => {
 
   const content = {
     pt: {
-      heading: 'Pare de herdar problemas técnicos.',
-      subheading: 'Comece a construir o futuro da sua empresa com a Suinit.',
-      cta: 'Falar com um Especialista',
+      heading: 'Vamos transformar visitas em orçamentos?',
+      subheading: 'Não deixe sua empresa invisível no digital. A Suinit é o parceiro que você precisa para crescer.',
+      cta: 'Chamar no WhatsApp',
     },
     en: {
-      heading: 'Stop inheriting technical problems.',
-      subheading: "Start building your company's future with Suinit.",
-      cta: 'Talk to a Specialist',
+      heading: 'Shall we turn visits into quotes?',
+      subheading: "Don't leave your company invisible online. Suinit is the partner you need to grow.",
+      cta: 'Chat on WhatsApp',
     },
     es: {
-      heading: 'Deja de heredar problemas técnicos.',
-      subheading: 'Empieza a construir el futuro de tu empresa con Suinit.',
-      cta: 'Hablar con un Especialista',
+      heading: '¿Transformamos visitas en presupuestos?',
+      subheading: 'No dejes tu empresa invisible en el digital. Suinit es el socio que necesitas para crecer.',
+      cta: 'Llamar por WhatsApp',
     },
   };
 
